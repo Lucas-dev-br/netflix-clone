@@ -37,5 +37,7 @@ export const Container = styled.div`
         outline: none;
       }
     }
+    button {
+    }
   }
 `;
