@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
+import logo from "../assets/logoNetflix.png";
 import { useNavigate } from "react-router-dom";
 
 function Header(props) {
@@ -22,19 +22,20 @@ export default Header;
 
 const Container = styled.div`
   padding: 0 4rem;
+  justify-content: space-between;
   .logo {
     img {
       height: 5rem;
     }
   }
-  button{
-    padding: 0.5rem 1rem; 
+  button {
+    padding: 0.5rem 1rem;
     background-color: #e50914;
     border: none;
     cursor: pointer;
     color: white;
     border-radius: 0.2rem;
     font-weight: bolder;
-    font-size: 
+    font-size: ;
   }
 `;
