@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassoword] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
 
-  const handleSignIn = async () => {
+  const handleLogin = async () => {
     try {
       const { email, password } = formValues;
       await signInWithEmailAndPassword(firebaseAuth, email, password);
@@ -26,10 +25,11 @@ export default function Login() {
   });
 
   return (
-    <Container showPassword={showPassword}>
+    <Container>
+      <BackGroundImages />
       <div className="content">
         <Header />
-        <div className="form-container flex-column a-center j-center">
+        <div className="form-container flex column a-center j-center">
           <div className="form flex column a-center j-center">
             <div className="title">
               <h3>Login</h3>
@@ -59,9 +59,7 @@ export default function Login() {
                   })
                 }
               />
-              <button onClick={() => setShowPassoword(true)}>
-                Vamos começar
-              </button>
+              <button onClick={() => handleLogin(true)}>Entrar</button>
             </div>
           </div>
         </div>
