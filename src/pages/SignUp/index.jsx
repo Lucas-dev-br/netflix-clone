@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "./styled";
 import Header from "../../components/Header";
 import BackGroundImages from "../../components/BackGroundImages";
+import { firebaseAuth } from "../../utils/firebase-config";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassoword] = useState(false);
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSignIn = async () => {
+    try {
+      const { email, password } = formValues;
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (err) {}
+  };
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) navigate("/");
+  });
+
   return (
-    <Container>
+    <Container showPassword={showPassword}>
       <BackGroundImages />
       <div className="content">
         <Header login />
@@ -21,15 +45,35 @@ export default function SignUp() {
               type="email"
               placeholder="Coloque seu email aqui"
               name="email"
+              value={formValues.email}
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  [e.target.name]: e.target.value,
+                })
+              }
             />
-            <input
-              type="password"
-              placeholder="Digite sua senha"
-              name="password"
-            />
-            <button>Vamos começar</button>
+            {showPassword && (
+              <input
+                type="password"
+                placeholder="Digite sua senha"
+                name="password"
+                value={formValues.password}
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+              />
+            )}
+            {!showPassword && (
+              <button onClick={() => setShowPassoword(true)}>
+                Vamos começar
+              </button>
+            )}
           </div>
-          <button>Login</button>
+          <button onClick={handleSignIn}>Registrar</button>
         </div>
       </div>
     </Container>

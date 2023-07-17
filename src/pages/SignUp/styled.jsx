@@ -25,12 +25,12 @@ export const Container = styled.div`
   }
   .form {
     display: grid;
-    /* grid-template-columns */
+    grid-template-columns: ${({showPassword}) => showPassword ? "1fr 1fr" : "2fr 1fr"};
     width: 60%;
     input {
       color: black;
       border: none;
-      padding: 1, 5rem;
+      padding: 1.5rem;
       font-size: 1.2rem;
       border: 1px solid black;
       &:focus {
@@ -38,6 +38,24 @@ export const Container = styled.div`
       }
     }
     button {
+      padding: 0.5rem 1rem;
+      background-color: #e50914;
+      border: none;
+      cursor: pointer;
+      color: white;
+      
+      font-weight: bolder;
+      font-size: 1.05rem;
     }
   }
+  button {
+      padding: 0.5rem 1rem;
+      background-color: #e50914;
+      border: none;
+      cursor: pointer;
+      color: white;
+      border-radius: 0.2rem;
+      font-weight: bolder;
+      font-size: 1.05rem;
+    }
 `;
